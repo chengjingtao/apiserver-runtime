@@ -18,8 +18,9 @@ spec:
       serviceAccountName: apiserver
       containers:
       - name: apiserver
-        image: apiserver-runtime-sample:v0.0.0 # {"$kpt-set":"image"}
-        imagePullPolicy: Never
+#        image: apiserver-runtime-sample:v0.0.0 # {"$kpt-set":"image"}
+        image: ko://sigs.k8s.io/apiserver-runtime/sample/cmd/apiserver
+        imagePullPolicy: Always
         args: ["--etcd-servers=http://localhost:2379"]
       - name: etcd
         image: quay.io/coreos/etcd:v3.4.9

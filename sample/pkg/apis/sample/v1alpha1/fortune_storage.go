@@ -6,7 +6,7 @@ import (
 	"os/exec"
 	"strings"
 
-	"k8s.io/apimachinery/pkg/api/errors"
+	//"k8s.io/apimachinery/pkg/api/errors"
 	"k8s.io/apimachinery/pkg/apis/meta/internalversion"
 	metav1 "k8s.io/apimachinery/pkg/apis/meta/v1"
 	"k8s.io/apimachinery/pkg/runtime"
@@ -79,9 +79,11 @@ func (f *Fortune) Get(_ context.Context, name string, _ *metav1.GetOptions) (run
 			out = []byte(fortunes[0])
 		}
 	}
-	if len(strings.TrimSpace(string(out))) == 0 {
-		return nil, errors.NewNotFound(Fortune{}.GetGroupVersionResource().GroupResource(), name)
-	}
-	obj.Value = strings.TrimSpace(string(out))
+	//if len(strings.TrimSpace(string(out))) == 0 {
+	//	klog.Error("error out")
+	//	return nil, errors.NewNotFound(Fortune{}.GetGroupVersionResource().GroupResource(), name)
+	//}
+	//obj.Value = strings.TrimSpace(string(out))
+	obj.Value = "好好学习，天天向上"
 	return obj, nil
 }
