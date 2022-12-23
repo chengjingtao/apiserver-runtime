@@ -19,6 +19,9 @@ var _ resourcerest.Getter = &Fortune{}
 var _ resourcerest.Lister = &Fortune{}
 var _ resourcerest.TableConvertor = &Fortune{}
 
+func  (f *Fortune)Destroy() {
+}
+
 // ConvertToTable handles table printing from kubectl get
 func (f *Fortune) ConvertToTable(ctx context.Context, object runtime.Object, tableOptions runtime.Object) (*metav1.Table, error) {
 	switch o := object.(type) {
