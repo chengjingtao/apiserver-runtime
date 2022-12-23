@@ -53,3 +53,6 @@ vet:
 
 local-run:
 	apiserver-boot run local --run=etcd,apiserver
+
+ko-deploy:
+	kustomize build ./install/ | ko resolve -P -f - | ko apply -f -
