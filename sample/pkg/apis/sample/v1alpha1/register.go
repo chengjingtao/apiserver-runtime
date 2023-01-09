@@ -33,3 +33,28 @@ var (
 func Resource(resource string) schema.GroupResource {
 	return SchemeGroupVersion.WithResource(resource).GroupResource()
 }
+//
+//func init() {
+//	if err := AddToScheme(scheme.Scheme); err != nil {
+//		klog.Fatalf("failed registering api types")
+//	}
+//}
+//
+//var AddToScheme = func(scheme *runtime.Scheme) error {
+//	metav1.AddToGroupVersion(scheme, schema.GroupVersion{
+//		Group:   config.MetaApiGroupName,
+//		Version: config.MetaApiVersionName,
+//	})
+//	// +kubebuilder:scaffold:install
+//
+//	scheme.AddKnownTypes(schema.GroupVersion{
+//		Group:   config.MetaApiGroupName,
+//		Version: config.MetaApiVersionName,
+//	}, &ClusterGateway{}, &ClusterGatewayList{})
+//	scheme.AddKnownTypes(schema.GroupVersion{
+//		Group:   config.MetaApiGroupName,
+//		Version: config.MetaApiVersionName,
+//	}, &ClusterGatewayProxyOptions{})
+//
+//	return nil
+//}

@@ -3,6 +3,8 @@ package v1alpha1
 import (
 	"context"
 	"fmt"
+	"net/url"
+	"sigs.k8s.io/apiserver-runtime/pkg/builder/resource"
 	"strings"
 
 	"k8s.io/apimachinery/pkg/api/meta"
@@ -96,13 +98,13 @@ func (Fortune) IsStorageVersion() bool {
 // NamespaceScoped returns true to indicate Fortune is a namespaced resource.
 // NamespaceScoped implements resource.Object.
 func (Fortune) NamespaceScoped() bool {
-	return true
+	return false
 }
 
-// New implements resource.Object
-func (Fortune) New() runtime.Object {
-	return &Fortune{}
-}
+//// New implements resource.Object
+//func (Fortune) New() runtime.Object {
+//	return &Fortune{}
+//}
 
 // NewList implements resource.Object
 func (Fortune) NewList() runtime.Object {
@@ -122,4 +124,20 @@ type FortuneList struct {
 // GetListMeta returns the ListMeta
 func (f *FortuneList) GetListMeta() *metav1.ListMeta {
 	return &f.ListMeta
+}
+
+// +k8s:deepcopy-gen:interfaces=k8s.io/apimachinery/pkg/runtime.Object
+// FortuneProxyOptions is the query options to a Archive's proxy call
+type FortuneProxyOptions struct {
+	metav1.TypeMeta
+
+	// Path is the URL path to use for the current proxy request
+	Path string  `json:"path"`
+}
+
+var _ resource.QueryParameterObject = &FortuneProxyOptions{}
+
+func (in *FortuneProxyOptions) ConvertFromUrlValues(values *url.Values) error {
+	in.Path = values.Get("path")
+	return nil
 }

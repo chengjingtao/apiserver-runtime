@@ -94,6 +94,8 @@ func GetOpenAPIDefinitions(ref common.ReferenceCallback) map[string]common.OpenA
 		"sigs.k8s.io/apiserver-runtime/sample/pkg/apis/sample/v1alpha1.FlunderStatus":         schema_pkg_apis_sample_v1alpha1_FlunderStatus(ref),
 		"sigs.k8s.io/apiserver-runtime/sample/pkg/apis/sample/v1alpha1.Fortune":               schema_pkg_apis_sample_v1alpha1_Fortune(ref),
 		"sigs.k8s.io/apiserver-runtime/sample/pkg/apis/sample/v1alpha1.FortuneList":           schema_pkg_apis_sample_v1alpha1_FortuneList(ref),
+		"sigs.k8s.io/apiserver-runtime/sample/pkg/apis/sample/v1alpha1.FortuneProxy":          schema_pkg_apis_sample_v1alpha1_FortuneProxy(ref),
+		"sigs.k8s.io/apiserver-runtime/sample/pkg/apis/sample/v1alpha1.FortuneProxyOptions":   schema_pkg_apis_sample_v1alpha1_FortuneProxyOptions(ref),
 		"sigs.k8s.io/apiserver-runtime/sample/pkg/apis/sample/v1alpha1.fortuneTableConverter": schema_pkg_apis_sample_v1alpha1_fortuneTableConverter(ref),
 	}
 }
@@ -2903,6 +2905,46 @@ func schema_pkg_apis_sample_v1alpha1_FortuneList(ref common.ReferenceCallback) c
 		},
 		Dependencies: []string{
 			"k8s.io/apimachinery/pkg/apis/meta/v1.ListMeta", "sigs.k8s.io/apiserver-runtime/sample/pkg/apis/sample/v1alpha1.Fortune"},
+	}
+}
+
+func schema_pkg_apis_sample_v1alpha1_FortuneProxy(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Type: []string{"object"},
+			},
+		},
+	}
+}
+
+func schema_pkg_apis_sample_v1alpha1_FortuneProxyOptions(ref common.ReferenceCallback) common.OpenAPIDefinition {
+	return common.OpenAPIDefinition{
+		Schema: spec.Schema{
+			SchemaProps: spec.SchemaProps{
+				Description: "FortuneProxyOptions is the query options to a Archive's proxy call",
+				Type:        []string{"object"},
+				Properties: map[string]spec.Schema{
+					"TypeMeta": {
+						SchemaProps: spec.SchemaProps{
+							Default: map[string]interface{}{},
+							Ref:     ref("k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta"),
+						},
+					},
+					"path": {
+						SchemaProps: spec.SchemaProps{
+							Description: "Path is the URL path to use for the current proxy request",
+							Default:     "",
+							Type:        []string{"string"},
+							Format:      "",
+						},
+					},
+				},
+				Required: []string{"TypeMeta", "path"},
+			},
+		},
+		Dependencies: []string{
+			"k8s.io/apimachinery/pkg/apis/meta/v1.TypeMeta"},
 	}
 }
 
